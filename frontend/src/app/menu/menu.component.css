@@ -1,0 +1,15 @@
+
+.cor {
+    background-color: #fafafa;
+    height: 25px;
+}
+
+.right {
+    float: right;
+    padding-left: 10px;
+}
+
+.left {
+    float: left;
+    padding-right: 10px;
+}

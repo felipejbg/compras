@@ -1,0 +1,8 @@
+
+<div *ngIf="mostrarMenu" class="cor">
+  <a routerLink="/" class="left" style="padding-left: 5px;"><h6>Home </h6></a>
+  <a routerLink="/produtos" class="left"><h6>Produtos </h6></a>
+  <a routerLink="/listas" class="left"><h6>Lista de Compras</h6></a>
+  <a routerLink="/cadastrar-usuario" class="left" *ngIf="adm"><h6>Cadastrar_Usuário</h6></a>
+  <a routerLink="/login" class="right" style="padding-right: 5px;"><h6>Logout</h6></a>
+</div>
