@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  adm: boolean = false;
+  adm: boolean = true;
 
   mostrarMenu: boolean = true;
 
