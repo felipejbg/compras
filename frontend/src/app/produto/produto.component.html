@@ -1,4 +1,6 @@
 
+<h6>Produtos</h6>
+
 <button class="open-button" (click)="openForm()">Adicionar</button>
 
 <div class="form-popup" id="myForm">
@@ -23,15 +25,16 @@
 
 
 <div id="myBtnContainer">
-  <button class="btn" (click)="filtro('all')"> Tudo</button>
+  <button class="btn" (click)="filtro('Tudo')"> Tudo</button>
   <button class="btn" (click)="filtro('Alimento')"> Alimentos</button>
   <button class="btn" (click)="filtro('Casa')"> Casa</button>
   <button class="btn" (click)="filtro('Ferramenta')"> Ferramentas</button>
   <button class="btn" (click)="filtro('Limpeza')"> Limpeza</button>
 </div>
 
+<h6 style="margin-left: 15px; margin-top: 5px;">{{ filtroAtual }}</h6>
+
 <div *ngFor="let produto of produtos">
   <div class="col-sm-3 coluna"> {{ produto?.nome }} <span (click)="delete(produto)" class="delete">x</span> </div>
-  
 </div>
 

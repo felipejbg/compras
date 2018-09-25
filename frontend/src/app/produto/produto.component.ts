@@ -10,7 +10,7 @@ import { Produto } from '../models/produto.model';
 })
 export class ProdutoComponent implements OnInit {
 
-  filtroAtual: string = 'all';
+  filtroAtual: string = 'Tudo';
   produtos: Produto[];
   todosProdutos: Produto[];
 
@@ -58,7 +58,7 @@ export class ProdutoComponent implements OnInit {
 
   filtro(valor) {
     this.filtroAtual = valor
-    if(this.filtroAtual === 'all') {
+    if(this.filtroAtual === 'Tudo') {
       this.produtos = this.todosProdutos;
     } else {
       this.produtos = [];
