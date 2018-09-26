@@ -1,0 +1,7 @@
+mongod
+
+d: & cd /cursos/compras/backend
+npm run dev
+
+d: & cd /cursos/compras/frontend
+ng serve

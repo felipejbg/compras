@@ -11,8 +11,8 @@ import { Produto } from '../models/produto.model';
 export class ProdutoComponent implements OnInit {
 
   filtroAtual: string = 'Tudo';
-  produtos: Produto[];
-  todosProdutos: Produto[];
+  produtos: Produto[] = [];
+  todosProdutos: Produto[] = [];
 
   constructor(
     private produtoService: ProdutoService

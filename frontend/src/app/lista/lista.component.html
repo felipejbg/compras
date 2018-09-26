@@ -1,3 +1,38 @@
-<p>
-  lista works!
-</p>
+
+<h6>Lista de Compras</h6>
+
+<div *ngIf="mostraLista">
+  <div id="myDIV" class="header">
+    <h4>Nova Lista</h4>
+    <input type="text" placeholder="Nome" #nomeLista required>
+    <input type="date" placeholder="Data" #dataLista required>
+    <span (click)="novaLista(nomeLista.value,dataLista.value); nomeLista.value=''; dataLista.value=''" class="addBtn">Adicionar</span>
+  </div>
+  <table style="width: 100%; margin-top: 5px">
+    <tr style="background-color: lightgray">
+      <th> Lista </th>
+      <th> Data </th>
+      <th style="float: right"> Apagar </th>
+    </tr>
+    <tr *ngFor="let lista of listas; let i = index" [class.zebra]="isPar(i)">
+      <td (click)="produtos(lista)"> {{ lista?.nome }} </td>
+      <td (click)="produtos(lista)"> {{ lista?.data | date:"dd/MM/yyyy" }} </td>
+      <td style="float: right"><span (click)="delete(lista)"> X </span></td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="mostraProdutos">
+  <div *ngFor="let p of produto">
+    <div class="col-sm-3 coluna" style="cursor: pointer;" (click)="addProduto(p)" [id]="p._id">
+      {{ p?.nome }}
+    </div>
+  </div>
+
+  <ul id="myUL" *ngFor="let produto of listaSelecionada.produtos">
+    <li> {{ produto }} <span (click)="atualiza(produto)" class="delete">x</span> </li>
+  </ul>
+  <a (click)="voltar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 10%;">Voltar</a>
+  <a (click)="salvar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 42%;">Salvar</a>
+  <span style="position: fixed; bottom: 23px; z-index: 99; right: 20%;">{{ listaSelecionada?.nome }}</span>
+</div>

@@ -1,16 +1,18 @@
-const Produto = require('./produto')
+const ProdutoLista = require('./produtoLista')
 
-Produto.methods(['get', 'post', 'put', 'delete'])
-Produto.updateOptions({new: true, runValidators: true})
+ProdutoLista.methods(['get', 'post', 'put', 'delete'])
+ProdutoLista.updateOptions({new: true, runValidators: true})
 
-//Carrega todos os produtos ordenados por nome
-Produto.route('sort.get', (req,res) => {
-    Produto.find().sort({nome:1}).find((error,value) => {
+ProdutoLista.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext)
+
+//Carrega ordenado pelo id da lista para facilitar.
+ProdutoLista.route('sort.get', (req,res) => {
+    ProdutoLista.find().sort({id_lista:1}).find((error,value) => {
         if(error) {
         res.status(500).json({errors: [error]})
         } else {
         if(value === null) {
-            res.status(404).json({errors: 'Produtos não encontrados!'})
+            res.status(404).json({errors: 'Itens não encontrados!'})
         } else {
             res.json(value)
         }
@@ -18,8 +20,8 @@ Produto.route('sort.get', (req,res) => {
     })
 })
 
-Produto.route('count', function (req, res, next) {
-    Produto.count(function (error, value) {
+ProdutoLista.route('count', function (req, res, next) {
+    ProdutoLista.count(function (error, value) {
         if (error) {
             res.status(500).json({errors: [error]})
         }else {
@@ -27,8 +29,6 @@ Produto.route('count', function (req, res, next) {
         }
     })
 })
-
-Produto.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext)
 
 function sendErrorsOrNext(req, res, next) {
   const bundle = res.locals.bundle
@@ -47,4 +47,4 @@ function parseErrors(nodeRestfulErrors) {
   return errors
 }
 
-module.exports = Produto
+module.exports = ProdutoLista
