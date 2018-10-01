@@ -7,13 +7,7 @@ module.exports = function(server) {
   server.use('/api', router)
 
   // rotas da API
-  const produtoService = require('../api/produto/produtoService')
-  produtoService.register(router, '/produto')
-
   const listaService = require('../api/lista/listaService')
   listaService.register(router, '/lista')
-
-  const produtoListaService = require('../api/produtoLista/produtoListaService')
-  produtoListaService.register(router, '/produtoLista')
 
 }

@@ -23,15 +23,28 @@
 </div>
 
 <div *ngIf="mostraProdutos">
-  <div *ngFor="let p of produto">
-    <div class="col-sm-3 coluna" style="cursor: pointer;" (click)="addProduto(p)" [id]="p._id">
-      {{ p?.nome }}
-    </div>
-  </div>
-
-  <ul id="myUL" *ngFor="let produto of listaSelecionada.produtos">
-    <li> {{ produto }} <span (click)="atualiza(produto)" class="delete">x</span> </li>
-  </ul>
+  <table style="width: 80%" id="tabelaProduto">
+    <tr>
+      <td style="width: 60%">
+        <input type="text" #nomeProduto required placeholder="Nome do produto..."  style="width: 100%">
+      </td>
+      <td style="width: 30%">
+        <select class="form-control" id="sel1" required #tipoProduto style="width: 100%">
+          <option>Alimento</option>
+          <option>Casa</option>
+          <option>Ferramenta</option>
+          <option>Limpeza</option>
+        </select>
+      </td>
+      <td style="width: 5%">
+        <button (click)="addProduto()" style="width: 100%">+</button>
+      </td>
+      <td style="width: 5%">
+        <button (click)="addProduto()" style="width: 100%">-</button>
+      </td>
+    </tr>
+  </table>
+  
   <a (click)="voltar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 10%;">Voltar</a>
   <a (click)="salvar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 42%;">Salvar</a>
   <span style="position: fixed; bottom: 23px; z-index: 99; right: 20%;">{{ listaSelecionada?.nome }}</span>

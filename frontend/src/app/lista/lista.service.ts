@@ -5,7 +5,6 @@ import { tap } from 'rxjs/operators';
 
 import { API } from '../app.api';
 import { Lista } from '../models/lista.model';
-import { ProdutoLista } from '../models/produto-lista.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,7 +22,7 @@ export class ListaService {
   getListas (): Observable<Lista[]> {
     return this.http.get<Lista[]>(`${API}/lista/sort`)
       .pipe(
-        tap(lista => console.log('Backend OK'))
+        tap(lista => console.log('Carregado lista ordenada por data.'))
       );
   }
 

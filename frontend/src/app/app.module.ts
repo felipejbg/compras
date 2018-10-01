@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
-import { ProdutoComponent } from './produto/produto.component';
 import { ListaComponent } from './lista/lista.component';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { ListaComponent } from './lista/lista.component';
     AppComponent,
     HomeComponent,
     MenuComponent,
-    ProdutoComponent,
     ListaComponent
   ],
   imports: [

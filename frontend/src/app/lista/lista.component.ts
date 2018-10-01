@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ListaService } from './lista.service';
-import { ProdutoService } from '../produto/produto.service';
-import { ProdutoListaService } from './produto-lista.service';
 import { Lista } from '../models/lista.model';
-import { Produto } from '../models/produto.model';
-import { ProdutoLista } from '../models/produto-lista.model';
 
 @Component({
   selector: 'app-lista',
@@ -20,30 +16,17 @@ export class ListaComponent implements OnInit {
   listas: Lista[] = [];
   listaSelecionada: Lista = new Lista();
 
-  produto: Produto[] = [];
-  produtoSave: Produto[] = [];
-
   constructor(
-    private listaService: ListaService,
-    private produtoService: ProdutoService,
-    private produtoListaService: ProdutoListaService
+    private listaService: ListaService
   ) { }
 
   ngOnInit() {
     this.getListas();
-    this.getProdutos();
   }
 
   // Para fazer a tabela em zebra
   isPar(i: number): boolean {
     return ((i%2) === 0)
-  }
-
-  getProdutos(): void {
-    this.produtoService.getProdutos()
-      .subscribe(produtos => {
-        this.produto = produtos
-      });
   }
 
   getListas(): void {
@@ -67,7 +50,6 @@ export class ListaComponent implements OnInit {
   delete(lista: Lista): void {
     this.listas = this.listas.filter(l => l !== lista);
     this.listaService.deleteLista(lista).subscribe();
-    this.produtoListaService.deleteProdutoNaLista(lista);
   }
 
   produtos(lista: Lista) {
@@ -82,25 +64,21 @@ export class ListaComponent implements OnInit {
   }
 
   salvar() {
-    console.log(this.produtoSave.length)
-    for(let i=0; i<this.produtoSave.length; i++) {
-      let produtoLista: ProdutoLista = new ProdutoLista();
-      produtoLista.id_lista = this.listaSelecionada._id;
-      produtoLista.id_produto = this.produtoSave[i]._id;
-      this.produtoListaService.adicionaProdutoNaLista(produtoLista).subscribe();
-    }
+    
   }
 
-  addProduto(produto: Produto) {
-    console.log(produto._id + ' ' + produto.nome)
-    var btnContainer = document.getElementById(produto._id);
+  addProduto(produto) {
+    var btnContainer = document.getElementById("tabelaProduto");
+    
+
+    /** Esse código abaixo é para adicionar uma linha em itens de uma lista. Não será usada aqui.
     if(btnContainer.className.endsWith('checked')) {
       btnContainer.classList.remove("checked");
-      this.produtoSave.splice(this.produtoSave.indexOf(produto), 1)
+      //this.produtoSave.splice(this.produtoSave.indexOf(produto), 1)
     } else {
       btnContainer.classList.add("checked");
-      this.produtoSave.push(produto);
-    }
+      //this.produtoSave.push(produto);
+    }*/
   }
 
 }
