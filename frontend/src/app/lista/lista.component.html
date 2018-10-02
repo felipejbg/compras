@@ -23,26 +23,22 @@
 </div>
 
 <div *ngIf="mostraProdutos">
+  <button (click)="addProduto()" style="width: 5%" class="btn btn-primary">+</button>
+  <button (click)="removeProduto()" style="width: 5%" class="btn btn-danger">-</button>
   <table style="width: 80%" id="tabelaProduto">
-    <tr>
-      <td style="width: 60%">
-        <input type="text" #nomeProduto required placeholder="Nome do produto..."  style="width: 100%">
+    <!--tr name="produtos">
+      <td style="width: 80%">
+        <input type="text" placeholder="Nome do produto..." style="width: 100%" name="nomeProduto" />
       </td>
-      <td style="width: 30%">
-        <select class="form-control" id="sel1" required #tipoProduto style="width: 100%">
+      <td style="width: 20%">
+        <select class="form-control" id="sel1" style="width: 100%" name="tipoProduto">
           <option>Alimento</option>
           <option>Casa</option>
           <option>Ferramenta</option>
           <option>Limpeza</option>
         </select>
       </td>
-      <td style="width: 5%">
-        <button (click)="addProduto()" style="width: 100%">+</button>
-      </td>
-      <td style="width: 5%">
-        <button (click)="addProduto()" style="width: 100%">-</button>
-      </td>
-    </tr>
+    </tr-->
   </table>
   
   <a (click)="voltar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 10%;">Voltar</a>

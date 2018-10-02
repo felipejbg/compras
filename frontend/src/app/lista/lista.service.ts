@@ -10,33 +10,38 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+const url = `${API}/lista`
+
 @Injectable({
   providedIn: 'root'
 })
 export class ListaService {
+
 
   constructor(
     private http: HttpClient
   ) { }
 
   getListas (): Observable<Lista[]> {
-    return this.http.get<Lista[]>(`${API}/lista/sort`)
-      .pipe(
-        tap(lista => console.log('Carregado lista ordenada por data.'))
-      );
+    return this.http.get<Lista[]>(url+'/sort').pipe(
+      tap(lista => console.log('Carregada lista ordenada por data.')));
   }
 
-  insereLista(valor: Lista): Observable<Lista> {
-    return this.http.post<Lista>(`${API}/lista`, valor, httpOptions).pipe(
+  insereLista(lista: Lista): Observable<Lista> {
+    return this.http.post<Lista>(url, lista, httpOptions).pipe(
       tap((lista: Lista) => console.log(`Lista inserida id=${lista._id}`))
     );
   }
 
   deleteLista(lista: Lista): Observable<Lista> {
-    const url = `${API}/lista/${lista._id}`;
-    return this.http.delete<Lista>(url, httpOptions).pipe(
-      tap(_ => console.log(`Lista deletada nome=${lista.nome}`))
-    );
+    return this.http.delete<Lista>(url+`/${lista._id}`, httpOptions).pipe(
+      tap(_ => console.log(`Lista deletada id=${lista._id}`)));
+  }
+
+  atualizaLista(lista: Lista): Observable<Lista> {
+    console.log(lista)
+    return this.http.put<Lista>(url+`/${lista._id}`, httpOptions).pipe(
+      tap(_ => console.log(`Lista atualizada id=${lista._id}`)));
   }
 
 }
