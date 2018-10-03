@@ -1,47 +1,22 @@
-
 <h6>Lista de Compras</h6>
 
-<div *ngIf="mostraLista">
-  <div id="myDIV" class="header">
-    <h4>Nova Lista</h4>
-    <input type="text" placeholder="Nome" #nomeLista required>
-    <input type="date" placeholder="Data" #dataLista required>
-    <span (click)="novaLista(nomeLista.value,dataLista.value); nomeLista.value=''; dataLista.value=''" class="addBtn">Adicionar</span>
-  </div>
-  <table style="width: 100%; margin-top: 5px">
-    <tr style="background-color: lightgray">
-      <th> Lista </th>
-      <th> Data </th>
-      <th style="float: right"> Apagar </th>
-    </tr>
-    <tr *ngFor="let lista of listas; let i = index" [class.zebra]="isPar(i)">
-      <td (click)="produtos(lista)"> {{ lista?.nome }} </td>
-      <td (click)="produtos(lista)"> {{ lista?.data | date:"dd/MM/yyyy" }} </td>
-      <td style="float: right"><span (click)="delete(lista)"> X </span></td>
-    </tr>
-  </table>
-</div>
-
-<div *ngIf="mostraProdutos">
-  <button (click)="addProduto()" style="width: 5%" class="btn btn-primary">+</button>
-  <button (click)="removeProduto()" style="width: 5%" class="btn btn-danger">-</button>
-  <table style="width: 80%" id="tabelaProduto">
-    <!--tr name="produtos">
-      <td style="width: 80%">
-        <input type="text" placeholder="Nome do produto..." style="width: 100%" name="nomeProduto" />
+<table>
+  <thead>
+    <th style="width: 65%">Nome</th>
+    <th style="width: 30%">Data</th>
+    <th style="width: 5%">Apaga</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lista of listas; let i = index" [class.zebra]="isPar(i)" >
+      <td (click)="verProdutos(lista)" style="width: 65%">
+        {{lista?.nome}}
       </td>
-      <td style="width: 20%">
-        <select class="form-control" id="sel1" style="width: 100%" name="tipoProduto">
-          <option>Alimento</option>
-          <option>Casa</option>
-          <option>Ferramenta</option>
-          <option>Limpeza</option>
-        </select>
+      <td (click)="verProdutos(lista)" style="width: 30%">
+        {{ lista?.data | date:"dd/MM/yyyy" }}
       </td>
-    </tr-->
-  </table>
-  
-  <a (click)="voltar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 10%;">Voltar</a>
-  <a (click)="salvar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 42%;">Salvar</a>
-  <span style="position: fixed; bottom: 23px; z-index: 99; right: 20%;">{{ listaSelecionada?.nome }}</span>
-</div>
+      <td (click)="delete(lista)" style="width: 5%">
+        X
+      </td>
+    </tr>
+  </tbody>
+</table>
