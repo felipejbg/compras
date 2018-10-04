@@ -8,13 +8,17 @@
   </thead>
   <tbody>
     <tr *ngFor="let lista of listas; let i = index" [class.zebra]="isPar(i)" >
-      <td (click)="verProdutos(lista)" style="width: 65%">
-        {{lista?.nome}}
+      <td style="width: 65%">
+        <a [routerLink]="['/produtos', lista._id]">
+          {{lista?.nome}}
+        </a>
       </td>
-      <td (click)="verProdutos(lista)" style="width: 30%">
-        {{ lista?.data | date:"dd/MM/yyyy" }}
+      <td style="width: 30%">
+        <a [routerLink]="['/produtos', lista._id]">
+          {{ lista?.data | date:"dd/MM/yyyy" }}
+        </a>
       </td>
-      <td (click)="delete(lista)" style="width: 5%">
+      <td (click)="delete(lista)" style="width: 5%; background: red; text-align: center; cursor: pointer;">
         X
       </td>
     </tr>

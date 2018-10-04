@@ -1,0 +1,46 @@
+<h6>Produtos da Lista {{ lista?.nome }}</h6>
+
+<form>
+  <table style="width: 80%" id="tabelaProduto">
+    <tr>
+      <td style="width: 65%">
+        <input type="text" #nomeProduto required placeholder="Nome do produto..."  style="width: 100%">
+      </td>
+      <td style="width: 30%">
+        <select class="form-control" #tipoProduto required style="width: 100%">
+          <option>Alimento</option>
+          <option>Casa</option>
+          <option>Ferramenta</option>
+          <option>Limpeza</option>
+        </select>
+      </td>
+      <td style="width: 5%">
+        <button (click)="addProduto(nomeProduto.value,tipoProduto.value)" style="width: 100%">+</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<table>
+  <thead>
+    <th style="width: 65%">Nome</th>
+    <th style="width: 30%">Tipo</th>
+    <th style="width: 5%">Apaga</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let produto of lista?.produto; let i = index" [class.zebra]="isPar(i)" >
+      <td style="width: 65%">
+        {{ produto?.nome }}
+      </td>
+      <td style="width: 30%">
+        {{ produto?.tipo }}
+      </td>
+      <td (click)="delete(produto)" style="width: 5%; background: red; text-align: center; cursor: pointer;">
+        X
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a [routerLink]="['/listas']" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 10%;">Voltar</a>
+<a (click)="salvar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; right: 10%; background: lightgray">Salvar</a>

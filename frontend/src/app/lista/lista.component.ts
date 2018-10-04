@@ -31,4 +31,11 @@ export class ListaComponent implements OnInit {
     return ((i%2) === 0)
   }
 
+  delete(lista: Lista) {
+    this.listas = this.listas.filter(l => l !== lista);
+    this.listaService.deleteLista(lista).subscribe(l => {
+      console.log('Lista apagada ' + lista.nome)
+    });
+  }
+
 }
