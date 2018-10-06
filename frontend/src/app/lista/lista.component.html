@@ -1,5 +1,30 @@
 <h6>Lista de Compras</h6>
 
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Nova Lista</h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="text" placeholder="Nome da lista" #nome required>
+        <input type="date" #data required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="addLista(nome.value,data.value)" data-dismiss="modal">Criar Lista</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <table>
   <thead>
     <th style="width: 65%">Nome</th>

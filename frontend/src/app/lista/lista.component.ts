@@ -26,6 +26,15 @@ export class ListaComponent implements OnInit {
     });
   }
 
+  addLista(nome,data) {
+    let lis: Lista = new Lista();
+    lis.nome = nome
+    lis.data = data
+    this.listaService.insereLista(lis).subscribe(l => {
+      this.listas.push(l);
+    });
+  }
+
   // Para fazer a tabela em zebra
   isPar(i: number): boolean {
     return ((i%2) === 0)

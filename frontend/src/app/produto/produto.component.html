@@ -28,7 +28,7 @@
     <th style="width: 5%">Apaga</th>
   </thead>
   <tbody>
-    <tr *ngFor="let produto of lista?.produto; let i = index" [class.zebra]="isPar(i)" >
+    <tr *ngFor="let produto of produtos; let i = index" [class.zebra]="isPar(i)" >
       <td style="width: 65%">
         {{ produto?.nome }}
       </td>

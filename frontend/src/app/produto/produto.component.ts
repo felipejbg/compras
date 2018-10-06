@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Lista, Produto } from '../models/lista.model';
+import { Lista } from '../models/lista.model';
 import { ListaService } from '../lista/lista.service';
+import { Produto } from '../models/produto.model';
+import { ProdutoService } from './produto.service';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-produto',
@@ -12,16 +15,24 @@ import { ListaService } from '../lista/lista.service';
 export class ProdutoComponent implements OnInit {
 
   lista: Lista;
+  produtos: Produto[] = []
 
   constructor(
     private listaService: ListaService,
+    private produtoService: ProdutoService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.listaService.getListaById(this.route.snapshot.params['id'])
-    .subscribe(li => {
+    this.listaService.getListaById(this.route.snapshot.params['id']).subscribe(li => {
       this.lista = li
+      this.getProdutos();
+    });
+  }
+
+  getProdutos() {
+    this.produtoService.getProdutos(this.route.snapshot.params['id']).subscribe(p => {
+      this.produtos = p;
     });
   }
 
@@ -31,17 +42,22 @@ export class ProdutoComponent implements OnInit {
   }
 
   addProduto(nomeProduto,tipoProduto) {
-    this.lista.produto.push(new Produto(nomeProduto,tipoProduto));
+    let p: Produto = new Produto()
+    p.idlista = this.lista._id
+    p.nome = nomeProduto
+    p.tipo = tipoProduto
+    this.produtos.push(p);
   }
 
   delete(produto) {
-    this.lista.produto.splice(this.lista.produto.indexOf(produto),1)
+    this.produtos.splice(this.produtos.indexOf(produto),1)
   }
 
   salvar() {
-    this.listaService.atualizaLista(this.lista).subscribe(
-      lista => console.log(`Lista atualizada ${lista.nome}`)
-    );
+    for(let i=0; i<this.produtos.length; i++) {
+      if(this.produtos[i]._id === '')
+        this.produtoService.insereProduto(this.produtos[i]).subscribe();
+    }
   }
 
 }

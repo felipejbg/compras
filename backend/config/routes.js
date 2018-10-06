@@ -10,4 +10,7 @@ module.exports = function(server) {
   const listaService = require('../api/lista/listaService')
   listaService.register(router, '/lista')
 
+  const produtoService = require('../api/produto/produtoService')
+  produtoService.register(router, '/produto')
+
 }

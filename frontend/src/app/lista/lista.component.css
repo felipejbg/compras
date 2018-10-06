@@ -11,3 +11,7 @@ table {
 table tbody tr:hover {
     background: #ccc;
 }
+
+div div div div input {
+    width: 100%;
+}

@@ -1,3 +1,5 @@
+docker run -d --name mongo -v ~/data/db:/data/db -p 27017:27017 mongo:4
+
 mongod
 
 d: & cd /cursos/compras/backend
