@@ -10,7 +10,7 @@ Produto.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext)
 Produto.route('get', (req,res) => {
     var q = url.parse(req.url, true).query;
     var id = q.id;
-    Produto.find({ idlista: id }, (error,value) => {
+    Produto.find({ idlista: id }).sort({nome:1}).find((error,value) => {
         if(error) {
             res.status(500).json({errors: [error]})
         } else {

@@ -49,14 +49,19 @@ export class ProdutoComponent implements OnInit {
     this.produtos.push(p);
   }
 
-  delete(produto) {
+  delete(produto: Produto) {
     this.produtos.splice(this.produtos.indexOf(produto),1)
+    this.produtoService.deleteProduto(produto).subscribe();
   }
 
   salvar() {
+    console.log(`Salvando... ${this.produtos}`)
     for(let i=0; i<this.produtos.length; i++) {
-      if(this.produtos[i]._id === '')
+      console.log(`this.produtos[i]._id ${this.produtos[i]._id}`)
+      if(this.produtos[i]._id === undefined)
         this.produtoService.insereProduto(this.produtos[i]).subscribe();
+      //else  // ainda não tem a opção de atualizar produtos.
+      //  this.produtoService.atualizaProduto(this.produtos[i]).subscribe();
     }
   }
 

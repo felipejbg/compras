@@ -1,0 +1,31 @@
+
+<h5>Lista para compras</h5>
+
+<table *ngIf="mostraLista">
+  <thead>
+    <th style="width: 70%">Nome</th>
+    <th style="width: 30%">Data</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lista of listas; let i = index" [class.zebra]="isPar(i)">
+      <td style="width: 70%">
+        <a (click)="mostraProdutos(lista)">
+          {{lista?.nome}}
+        </a>
+      </td>
+      <td style="width: 30%">
+        <a (click)="mostraProdutos(lista)">
+          {{ lista?.data | date:"dd/MM/yyyy" }}
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="main" *ngIf="!mostraLista">
+  <ul id="myUL" *ngFor="let produto of produtos; let i = index" [class.zebra]="isPar(i)">
+    <li id="{{i}}" (click)="checado(i)">{{produto?.nome}}</li>
+  </ul>
+</div>
+
+<a (click)="voltar()" style="cursor: pointer; position: fixed; bottom: 23px; z-index: 99; left: 10%;" *ngIf="!mostraLista">Voltar</a>
